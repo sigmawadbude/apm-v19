@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideRouter, RouterModule, Routes } from '@angular/router';
 import { routes } from './app-routes';
+import { provideHttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -23,4 +24,4 @@ export class App {
   pageTitle = 'Angular: Getting Started';
 }
 
-bootstrapApplication(App, { providers: [provideRouter(routes)] });
+bootstrapApplication(App, { providers: [provideRouter(routes), provideHttpClient()] });

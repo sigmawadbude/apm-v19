@@ -1,10 +1,16 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Product } from '../product';
 import { Subscription } from 'rxjs';
+import { ProductService } from './product-service';
+import { Product } from './product';
+import { CurrencyPipe, LowerCasePipe, NgFor, NgIf } from '@angular/common';
+import { ConvertToSpacesPipe } from '../shared/convert-to-spaces.pipe';
+import { StarComponent } from '../shared/star.component';
+import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-product-list',
-  imports: [],
+  imports: [NgIf, NgFor, LowerCasePipe, CurrencyPipe, ConvertToSpacesPipe, StarComponent, RouterModule, FormsModule],
   templateUrl: './product-list.component.html',
 })
 export class ProductListComponent implements OnInit, OnDestroy {
@@ -29,11 +35,11 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.sub = this.productService.getProducts().subscribe({
-      next: (products) => {
+      next: (products: Product[]) => {
         this.products = products;
         this.listFilter = '';
       },
-      error: (err) => (this.errorMessage = err),
+      error: (err: string) => (this.errorMessage = err),
     });
   }
 

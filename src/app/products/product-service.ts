@@ -7,7 +7,7 @@ import { Product } from "./product";
     providedIn: 'root'
 })
 export class ProductService {
-    url = 'api/products/products.json';
+    url = 'http://localhost:3000/products';
 
     constructor(private http: HttpClient) { }
     getProducts(): Observable<Product[]> {
